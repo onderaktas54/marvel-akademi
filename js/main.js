@@ -1,0 +1,166 @@
+// === Fakülte tanımları ===
+const FACULTIES = {
+  "Süper Güç Mühendisliği": "Fiziksel güçler ve dövüş sanatları alanında eğitim verir.",
+  "Kozmik Bilimler": "Uzay, boyutlar arası yolculuk ve kozmik enerji araştırmaları.",
+  "Teknoloji ve Zırh Tasarımı": "Mühendislik, yapay zeka ve ileri silah sistemleri.",
+  "Büyü ve Mistik Sanatlar": "Büyü, zaman manipülasyonu ve boyutlar arası iletişim.",
+  "Strateji ve Liderlik": "Taktik, espiyonaj ve takım yönetimi."
+};
+
+// === Veri yükleme ===
+async function loadCharacters() {
+  const response = await fetch("data/characters.json");
+  const data = await response.json();
+  return data.characters;
+}
+
+// === Kart HTML üretme ===
+function createCharacterCard(character) {
+  const card = document.createElement("a");
+  card.href = `karakter.html?id=${character.id}`;
+  card.className = "card";
+  card.innerHTML = `
+    <img class="card__image" src="${character.thumbnail}" alt="${character.name}">
+    <div class="card__body">
+      <div class="card__name">${character.name}</div>
+      <div class="card__role">${character.role}</div>
+      <div class="card__faculty">${character.faculty}</div>
+    </div>
+  `;
+  return card;
+}
+
+// === Sayfa tespiti ve başlatma ===
+document.addEventListener("DOMContentLoaded", async () => {
+  const characters = await loadCharacters();
+  const path = window.location.pathname.split("/").pop() || "index.html";
+
+  if (path === "index.html" || path === "") {
+    renderHomePage(characters);
+  } else if (path === "kadro.html") {
+    renderKadroPage(characters);
+  } else if (path === "karakter.html") {
+    renderCharacterDetail(characters);
+  } else if (path === "fakulteler.html") {
+    renderFacultiesPage(characters);
+  }
+});
+
+// === Ana sayfa ===
+function renderHomePage(characters) {
+  // Öne çıkan kadro: ilk 4 karakter
+  const featuredGrid = document.getElementById("featured-grid");
+  if (featuredGrid) {
+    characters.slice(0, 4).forEach(c => {
+      featuredGrid.appendChild(createCharacterCard(c));
+    });
+  }
+
+  // Fakülte önizleme
+  const facultiesPreview = document.getElementById("faculties-preview");
+  if (facultiesPreview) {
+    Object.entries(FACULTIES).forEach(([name, desc]) => {
+      const count = characters.filter(c => c.faculty === name).length;
+      const card = document.createElement("div");
+      card.className = "faculty-card";
+      card.innerHTML = `
+        <div class="faculty-card__title">${name}</div>
+        <div class="faculty-card__desc">${desc}</div>
+        <div class="faculty-card__count">${count} akademisyen</div>
+      `;
+      facultiesPreview.appendChild(card);
+    });
+  }
+}
+
+// === Kadro sayfası ===
+function renderKadroPage(characters) {
+  const filterBar = document.getElementById("filter-bar");
+  const grid = document.getElementById("kadro-grid");
+  if (!filterBar || !grid) return;
+
+  // Fakülte isimleri
+  const faculties = ["Tümü", ...Object.keys(FACULTIES)];
+
+  // Filtre butonları
+  faculties.forEach(faculty => {
+    const btn = document.createElement("button");
+    btn.className = "filter-bar__btn" + (faculty === "Tümü" ? " active" : "");
+    btn.textContent = faculty;
+    btn.addEventListener("click", () => {
+      filterBar.querySelectorAll(".filter-bar__btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderCards(faculty === "Tümü" ? characters : characters.filter(c => c.faculty === faculty));
+    });
+    filterBar.appendChild(btn);
+  });
+
+  function renderCards(list) {
+    grid.innerHTML = "";
+    list.forEach(c => grid.appendChild(createCharacterCard(c)));
+  }
+
+  renderCards(characters);
+}
+
+// === Karakter detay ===
+function renderCharacterDetail(characters) {
+  const container = document.getElementById("character-detail");
+  if (!container) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const id = Number(params.get("id"));
+  const character = characters.find(c => c.id === id);
+
+  if (!character) {
+    container.innerHTML = `<p style="padding:2rem;">Karakter bulunamadı.</p>`;
+    return;
+  }
+
+  document.title = `${character.name} — Marvel Üniversitesi`;
+
+  container.innerHTML = `
+    <div>
+      <img class="detail__image" src="${character.thumbnail}" alt="${character.name}">
+    </div>
+    <div>
+      <h1 class="detail__name">${character.name}</h1>
+      <div class="detail__role">${character.role}</div>
+      <div class="detail__faculty">${character.faculty}</div>
+      <p class="detail__description">${character.description}</p>
+      <ul class="detail__powers">
+        ${character.powers.map(p => `<li>${p}</li>`).join("")}
+      </ul>
+      <p style="margin-top:1rem;color:#888;font-size:0.85rem;">
+        Toplam ${character.comicsCount} çizgi romanda yer aldı.
+      </p>
+    </div>
+  `;
+}
+
+// === Fakülteler sayfası ===
+function renderFacultiesPage(characters) {
+  const container = document.getElementById("faculties-container");
+  if (!container) return;
+
+  Object.entries(FACULTIES).forEach(([name, desc]) => {
+    const members = characters.filter(c => c.faculty === name);
+
+    const section = document.createElement("div");
+    section.style.marginBottom = "3rem";
+    section.innerHTML = `
+      <div class="faculty-card" style="margin-bottom:1.5rem;">
+        <div class="faculty-card__title">${name}</div>
+        <div class="faculty-card__desc">${desc}</div>
+        <div class="faculty-card__count">${members.length} akademisyen</div>
+      </div>
+    `;
+
+    const grid = document.createElement("div");
+    grid.className = "card-grid";
+    members.forEach(c => grid.appendChild(createCharacterCard(c)));
+    section.appendChild(grid);
+
+    container.appendChild(section);
+  });
+}
