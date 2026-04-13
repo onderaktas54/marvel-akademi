@@ -301,6 +301,166 @@ img {
   margin-bottom: 1rem;
 }
 
+/* === Cart Icon (Navbar) === */
+.cart-icon {
+  background-color: var(--red-dark);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.cart-icon:hover,
+.cart-icon.active {
+  background-color: var(--white);
+  color: var(--red);
+}
+
+/* === Course Grid === */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* === Course Card === */
+.course-card {
+  background-color: var(--dark-gray);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.course-card__id {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.course-card__name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.course-card__meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.course-card__meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.course-card__desc {
+  font-size: 0.9rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.course-card__faculty {
+  font-size: 0.8rem;
+  color: var(--red);
+  font-weight: 600;
+}
+
+/* === Buttons === */
+.btn {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn--add {
+  background-color: var(--red);
+  color: var(--white);
+  align-self: flex-start;
+}
+
+.btn--add:hover {
+  background-color: var(--red-dark);
+}
+
+.btn--add.added {
+  background-color: var(--gray);
+  cursor: default;
+}
+
+.btn--remove {
+  background-color: transparent;
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+
+.btn--remove:hover {
+  background-color: var(--red);
+  color: var(--white);
+}
+
+.btn--danger {
+  background-color: var(--red-dark);
+  color: var(--white);
+  margin-top: 1.5rem;
+}
+
+.btn--danger:hover {
+  background-color: var(--red);
+}
+
+/* === Cart Items === */
+.cart-item {
+  background-color: var(--dark-gray);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--card-shadow);
+}
+
+.cart-item__info {
+  flex: 1;
+}
+
+.cart-item__name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.cart-item__details {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.cart-total {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: linear-gradient(145deg, var(--dark-gray), var(--gray));
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
 /* === Responsive === */
 @media (max-width: 768px) {
   .hero__title {
