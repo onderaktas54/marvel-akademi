@@ -1,0 +1,140 @@
+const CHARACTER_DATA = {
+  "meta": {
+    "fetchedAt": "2026-04-13",
+    "attribution": "Data provided by Marvel. © 2026 Marvel"
+  },
+  "characters": [
+    {
+      "id": 1009368,
+      "name": "Iron Man",
+      "description": "Wounded, captured and forced to build a weapon by his enemies, billionaire industrialist Tony Stark instead created an advanced suit of armor to save his life and escape captivity.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55.jpg",
+      "role": "Profesör",
+      "faculty": "Teknoloji ve Zırh Tasarımı",
+      "category": "avengers",
+      "comicsCount": 2600,
+      "powers": ["Genius-level intellect", "Powered armor suit", "Flight"]
+    },
+    {
+      "id": 1009664,
+      "name": "Thor",
+      "description": "Thor is the Asgardian God of Thunder and the son of Odin, the All-Father.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350.jpg",
+      "role": "Profesör",
+      "faculty": "Süper Güç Mühendisliği",
+      "category": "avengers",
+      "comicsCount": 1700,
+      "powers": ["Superhuman strength", "Mjolnir", "Lightning control"]
+    },
+    {
+      "id": 1009220,
+      "name": "Captain America",
+      "description": "Vowing to serve his country any way he could, young Steve Rogers took the super soldier serum to become America's one-man army.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/3/50/537ba56d31087.jpg",
+      "role": "Profesör",
+      "faculty": "Strateji ve Liderlik",
+      "category": "avengers",
+      "comicsCount": 2400,
+      "powers": ["Super soldier serum", "Vibranium shield", "Master tactician"]
+    },
+    {
+      "id": 1009282,
+      "name": "Doctor Strange",
+      "description": "Dr. Stephen Strange is the Sorcerer Supreme, the primary protector of Earth against magical and mystical threats.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/5/f0/5261a85a501fe.jpg",
+      "role": "Profesör",
+      "faculty": "Büyü ve Mistik Sanatlar",
+      "category": "avengers",
+      "comicsCount": 800,
+      "powers": ["Sorcery", "Time manipulation", "Dimensional travel"]
+    },
+    {
+      "id": 1009652,
+      "name": "Thanos",
+      "description": "The Mad Titan Thanos, a filtered through his obsession with Death, is one of the most powerful villains in the Marvel Universe.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/6/40/5274137e3e2cd.jpg",
+      "role": "Rektör",
+      "faculty": "Kozmik Bilimler",
+      "category": "villain",
+      "comicsCount": 400,
+      "powers": ["Cosmic power", "Superhuman strength", "Genius intellect"]
+    },
+    {
+      "id": 1009407,
+      "name": "Loki",
+      "description": "Loki is the God of Mischief and the adopted son of Odin.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/d/90/5261a6eed4b16.jpg",
+      "role": "Dekan",
+      "faculty": "Büyü ve Mistik Sanatlar",
+      "category": "villain",
+      "comicsCount": 500,
+      "powers": ["Sorcery", "Shapeshifting", "Illusion casting"]
+    },
+    {
+      "id": 1009610,
+      "name": "Spider-Man",
+      "description": "Bitten by a radioactive spider, high school student Peter Parker gained the speed, strength and powers of a spider.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/9/30/538cd33e15ab7.jpg",
+      "role": "Öğrenci",
+      "faculty": "Teknoloji ve Zırh Tasarımı",
+      "category": "spider-verse",
+      "comicsCount": 4000,
+      "powers": ["Wall-crawling", "Spider-sense", "Web-shooting"]
+    },
+    {
+      "id": 1010733,
+      "name": "Star-Lord",
+      "description": "Peter Quill is Star-Lord, the half-human, half-alien leader of the Guardians of the Galaxy.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/9/a0/537bc55e8b1f5.jpg",
+      "role": "Misafir Öğretim Üyesi",
+      "faculty": "Kozmik Bilimler",
+      "category": "guardians",
+      "comicsCount": 300,
+      "powers": ["Expert marksman", "Master tactician", "Element Gun"]
+    },
+    {
+      "id": 1009629,
+      "name": "Storm",
+      "description": "Ororo Monroe is a mutant with the ability to control the weather.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d.jpg",
+      "role": "Araştırma Görevlisi",
+      "faculty": "Süper Güç Mühendisliği",
+      "category": "x-men",
+      "comicsCount": 1200,
+      "powers": ["Weather manipulation", "Flight", "Energy projection"]
+    },
+    {
+      "id": 1009718,
+      "name": "Wolverine",
+      "description": "Born with super-human senses and the power to heal from almost any wound, Wolverine was unwillingly transformed into a living weapon.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/2/60/537bcaef0f6cf.jpg",
+      "role": "Araştırma Görevlisi",
+      "faculty": "Strateji ve Liderlik",
+      "category": "x-men",
+      "comicsCount": 3000,
+      "powers": ["Adamantium claws", "Healing factor", "Enhanced senses"]
+    },
+    {
+      "id": 1009189,
+      "name": "Black Widow",
+      "description": "Natasha Romanoff is one of the most skilled spies and assassins in the world.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/f/30/50fecad1f395b.jpg",
+      "role": "Profesör",
+      "faculty": "Strateji ve Liderlik",
+      "category": "avengers",
+      "comicsCount": 500,
+      "powers": ["Expert martial artist", "Espionage", "Weapons specialist"]
+    },
+    {
+      "id": 1009351,
+      "name": "Hulk",
+      "description": "Caught in a gamma bomb explosion while trying to save the life of a teenager, Dr. Bruce Banner was transformed into the incredibly powerful creature called the Hulk.",
+      "thumbnail": "https://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0.jpg",
+      "role": "Profesör",
+      "faculty": "Süper Güç Mühendisliği",
+      "category": "avengers",
+      "comicsCount": 1800,
+      "powers": ["Superhuman strength", "Healing factor", "Gamma radiation"]
+    }
+  ]
+};

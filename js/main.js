@@ -7,11 +7,9 @@ const FACULTIES = {
   "Strateji ve Liderlik": "Taktik, espiyonaj ve takım yönetimi."
 };
 
-// === Veri yükleme ===
-async function loadCharacters() {
-  const response = await fetch("data/characters.json");
-  const data = await response.json();
-  return data.characters;
+// === Veri yükleme (global CHARACTER_DATA değişkeninden) ===
+function loadCharacters() {
+  return CHARACTER_DATA.characters;
 }
 
 // === Kart HTML üretme ===
@@ -31,8 +29,8 @@ function createCharacterCard(character) {
 }
 
 // === Sayfa tespiti ve başlatma ===
-document.addEventListener("DOMContentLoaded", async () => {
-  const characters = await loadCharacters();
+document.addEventListener("DOMContentLoaded", () => {
+  const characters = loadCharacters();
   const path = window.location.pathname.split("/").pop() || "index.html";
 
   if (path === "index.html" || path === "") {
@@ -48,7 +46,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // === Ana sayfa ===
 function renderHomePage(characters) {
-  // Öne çıkan kadro: ilk 4 karakter
   const featuredGrid = document.getElementById("featured-grid");
   if (featuredGrid) {
     characters.slice(0, 4).forEach(c => {
@@ -56,7 +53,6 @@ function renderHomePage(characters) {
     });
   }
 
-  // Fakülte önizleme
   const facultiesPreview = document.getElementById("faculties-preview");
   if (facultiesPreview) {
     Object.entries(FACULTIES).forEach(([name, desc]) => {
@@ -79,10 +75,8 @@ function renderKadroPage(characters) {
   const grid = document.getElementById("kadro-grid");
   if (!filterBar || !grid) return;
 
-  // Fakülte isimleri
   const faculties = ["Tümü", ...Object.keys(FACULTIES)];
 
-  // Filtre butonları
   faculties.forEach(faculty => {
     const btn = document.createElement("button");
     btn.className = "filter-bar__btn" + (faculty === "Tümü" ? " active" : "");
